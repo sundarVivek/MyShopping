@@ -1,0 +1,28 @@
+
+.container{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn{
+     margin-left: 400px;
+}
+.example-card{
+    width: 50%;
+    margin-bottom: 20px;
+    overflow-y: scroll;
+    height: 300px;
+}
+.countForm{
+    display: flex;
+    text-align: center;
+}
+.addBtn{
+    color: white;
+    background-color: green;
+}
+.subBtn{
+    color: white;
+    background-color: red;
+}

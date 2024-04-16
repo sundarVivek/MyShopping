@@ -1,0 +1,16 @@
+main {
+    display: flex;
+    justify-content: center;
+  }
+  
+  main section form {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    align-content: space-around;
+  }
+  .mat-form-field{
+    margin-bottom: 30px;
+  }
+  
+  

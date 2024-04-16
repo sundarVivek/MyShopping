@@ -1,0 +1,22 @@
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Shopping</span>
+      <span class="example-spacer">
+        <h3>{{customerName}}</h3>
+      </span>
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="openCart()">
+        <div matBadge={{cartCount}} matBadgeOverlap="false" class="demo-section">
+          <mat-icon (click)="openCart()">shopping_cart</mat-icon>
+        </div>
+      </button>
+      <button *ngIf="!isLoggedIn()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon (click)="logout()">person</mat-icon>
+      </button>
+      <button *ngIf="isLoggedIn()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon (click)="logout()">logout</mat-icon>
+      </button>
+    </mat-toolbar>
+  </p>

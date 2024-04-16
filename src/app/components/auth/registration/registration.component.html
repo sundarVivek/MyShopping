@@ -1,0 +1,13 @@
+<main class="container" style="margin-top: 100px;">
+	<section>
+		<form class="auth-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+			<mat-form-field>
+				<input matInput #email maxlength="30" placeholder="Email" formControlName="email" name="email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput #password maxlength="30" placeholder="Password" formControlName="password" name="password">
+    </mat-form-field>
+    <button mat-raised-button color="primary">Submit</button>
+  </form>
+</section>
+</main>

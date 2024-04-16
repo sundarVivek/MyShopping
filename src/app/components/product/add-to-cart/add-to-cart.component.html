@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Add to cart</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="container">
+        <mat-card class="example-card">
+            <mat-card-title>{{data.title}}</mat-card-title>
+            <mat-card-content>
+                <img class="image" src={{data.thumbnail}} width="200px" height="150px">
+              <p>{{data.description}}</p>
+            </mat-card-content>
+            <mat-form-field appearance="outline" class="countForm">
+                <button class="addBtn" mat-button matSuffix (click)="incrementCount()">
+                  <mat-icon>add</mat-icon>
+                </button>
+                <input class="count" matInput type="number" [(ngModel)]="count" [min]="0" [max]="100">
+                <button class="subBtn" mat-button matPrefix (click)="decrementCount()">
+                  <mat-icon>remove</mat-icon>
+                </button>
+              </mat-form-field>
+              
+            <mat-card-footer>
+                {{data.price|currency:'INR'}}
+            </mat-card-footer>
+          </mat-card>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="sendDataToReceiver(data)">Add</button>
+</mat-dialog-actions>

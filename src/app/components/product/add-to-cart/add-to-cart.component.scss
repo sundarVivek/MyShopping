@@ -1,0 +1,17 @@
+.countForm{
+    display: flex;
+    text-align: center;
+}
+.addBtn{
+    color: white;
+    background-color: green;
+    position: relative;
+    width: 30px;
+}
+.subBtn{
+    color: white;
+    background-color: red;
+}
+ .mat-form-field-infix {
+    width: auto !important;
+}
