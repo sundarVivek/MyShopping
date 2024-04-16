@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 import { LogOutComponent } from '../auth/log-out/log-out.component';
-import { AddToCartComponent } from '../product/add-to-cart/add-to-cart.component';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +23,7 @@ export class HeaderComponent implements OnDestroy {
   ngOnInit(): void {
     this.getCartCount();
     this.showCustomer();
+
   }
 
   getCartCount() {
@@ -43,6 +43,7 @@ export class HeaderComponent implements OnDestroy {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.auth.logout();
+          this.customerName='';
           this.route.navigate(['/login'])
         }
       });
@@ -66,8 +67,7 @@ export class HeaderComponent implements OnDestroy {
   customerName: string = '';
   showCustomer() {
     if (this.isLoggedIn()) {
-      this.showCustomer = this.auth.getCurrentUser();
-      console.log("customer", this.showCustomer);
+      this.customerName = this.auth.getCurrentUser().email;
     }
   }
 
