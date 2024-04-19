@@ -15,14 +15,25 @@
     height: 300px;
 }
 .countForm{
-    display: flex;
-    text-align: center
+    // display: flex;
+    // text-align: center;
+    width: 37px;
+    border: none;
 }
 .addBtn{
     color: white;
-    background-color: green;
+    width: 30px;
 }
 .subBtn{
     color: white;
-    background-color: red;
+    width: 30px;
 }
+.emptyCart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mat-icon{
+ background-color: red;
+}
+

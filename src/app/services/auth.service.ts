@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   storageKey: string = 'credentials';
   private credentialSubject: any = new BehaviorSubject<any[]>([]);
-  constructor() { }
+  constructor(private productService:ProductService) { }
 
   storeRegistration(user: any) {
     const currentItems: any = this.credentialSubject.getValue();
@@ -36,6 +37,7 @@ export class AuthService {
   }
   logout(){
     localStorage.removeItem('currentUser');
+    this.productService.removeCart();
   }
   getCurrentUser(): any {
     // Get the current user from local storage

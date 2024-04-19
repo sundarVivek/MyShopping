@@ -42,5 +42,16 @@ export class ViewProductComponent implements OnInit {
   isLoggedIn(): boolean {
     return this.auth.isLoggedIn();
   }
+  isLoading: boolean = true;
+  loadData() {
+    this.isLoading = true;
+    this.productService.getAllProducts().subscribe(data => {
+      // Process data
+      this.isLoading = false;
+    }, error => {
+      // Handle error
+      this.isLoading = false;
+    });
+  }
 
 }

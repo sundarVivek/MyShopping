@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegistrationComponent implements OnInit {
   registerForm!: FormGroup;
   constructor(private fb: FormBuilder,
-    private auth: AuthService) { }
+    private auth: AuthService,
+    private route:Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -21,6 +23,7 @@ export class RegistrationComponent implements OnInit {
   onSubmit() {
     const users:any=this.registerForm.value;
     this.auth.storeRegistration(users);
+    this.route.navigate(['/login']);
   }
 
 }

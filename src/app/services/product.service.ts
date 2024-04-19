@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class ProductService {
   storageKeyForCount: string = 'cartCount'
   private cartItemsSubject: any = new BehaviorSubject<any[]>([]);
   private cartCountSubject = new BehaviorSubject<number>(0);
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.updateCartCount();
     this.cartItemsSubject.next(this.getCartItemsFromLocalStorage());
   }
@@ -26,7 +26,7 @@ export class ProductService {
     const updatedItems: any = [...currentItems, item];
     this.cartItemsSubject.next(updatedItems);
     localStorage.setItem(this.storageKey, JSON.stringify(updatedItems));
-     this.updateCartCount();
+    this.updateCartCount();
   }
 
   getCartItems() {
@@ -55,20 +55,27 @@ export class ProductService {
   }
   updateCartCount(): void {
     const cartItems = this.getCartItemsFromLocalStorage();
-    const cartCount = cartItems.length;
-    localStorage.setItem(this.storageKeyForCount, JSON.stringify(cartCount));
-    this.cartCountSubject.next(cartCount);
+    this.cartCount = cartItems.length;
+    localStorage.setItem(this.storageKeyForCount, JSON.stringify(this.cartCount));
+    this.cartCountSubject.next(this.cartCount);
   }
-  incrementcount(item:any){
+  incrementcount(item: any) {
     if (item.quantity > 1) {
       item.quantity++;
       this.updateCartItemsInLocalStorage(this.cartItemsSubject);
     }
   }
-  decrementCount(item:any){
+  decrementCount(item: any) {
     if (item.quantity > 1) {
       item.quantity--;
       this.updateCartItemsInLocalStorage(this.cartItemsSubject);
     }
+  }
+  removeCart() {
+    localStorage.removeItem(this.storageKey);
+    const cartItems = this.getCartItemsFromLocalStorage();
+    this.cartCount = cartItems.length;
+    this.cartCountSubject.next(this.cartCount);
+    this.cartItemsSubject.next(cartItems);
   }
 }

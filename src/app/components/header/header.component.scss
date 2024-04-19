@@ -13,4 +13,9 @@
 }
 .example-spacer{
   text-align: right;
+  padding-right: 30px;
+}
+.buttons{
+  display: flex;
+  justify-content: space-around;
 }

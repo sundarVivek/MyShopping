@@ -23,7 +23,6 @@ export class HeaderComponent implements OnDestroy {
   ngOnInit(): void {
     this.getCartCount();
     this.showCustomer();
-
   }
 
   getCartCount() {

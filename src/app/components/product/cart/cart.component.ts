@@ -11,25 +11,33 @@ export class CartComponent implements OnDestroy {
   cartItems: any;
   TotalAmount: number = 0;
   TotalAmountToDisplay: any;
+  showEmpty: boolean = false;
 
   constructor(private productService: ProductService) {
   }
 
   ngOnInit(): void {
     this.productService.getCartItems().subscribe((items: any) => {
-      this.cartItems = items;
+      console.log('item', items);
+      if(items.length===0){
+        this.showEmpty=true;
+      }else{
+        this.cartItems = items;
+        console.log("cartItems",this.cartItems)
+        if (Array.isArray(this.cartItems)) {
+          for (const item of this.cartItems) {
+            this.TotalAmount += item.total;
+          }
+          localStorage.setItem('Total', JSON.stringify(this.TotalAmount));
+          this.TotalAmountToDisplay = localStorage.getItem('Total');
+        } else {
+          console.error("Data retrieved from local storage is not in array format.");
+        }
+      }
+ 
     });
     // const storedJsonString = localStorage.getItem('cartItems') as string;
     // this.cartItems = JSON.parse(storedJsonString);
-    if (Array.isArray(this.cartItems)) {
-      for (const item of this.cartItems) {
-        this.TotalAmount += item.total;
-      }
-      localStorage.setItem('Total', JSON.stringify(this.TotalAmount));
-      this.TotalAmountToDisplay = localStorage.getItem('Total');
-    } else {
-      console.error("Data retrieved from local storage is not in array format.");
-    }
   }
 
   deleteItem(index: any) {
