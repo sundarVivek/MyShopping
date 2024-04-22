@@ -10,36 +10,37 @@ import { ProductService } from 'src/app/services/product.service';
 export class CartComponent implements OnDestroy {
   cartItems: any;
   TotalAmount: number = 0;
-  TotalAmountToDisplay: any;
   showEmpty: boolean = false;
 
   constructor(private productService: ProductService) {
   }
 
   ngOnInit(): void {
+    this.cartDetails();
+  }
+  cartDetails() {
     this.productService.getCartItems().subscribe((items: any) => {
       console.log('item', items);
-      if(items.length===0){
-        this.showEmpty=true;
-      }else{
+      if (items.length === 0) {
+        this.showEmpty = true;
+      } else {
         this.cartItems = items;
-        console.log("cartItems",this.cartItems)
-        if (Array.isArray(this.cartItems)) {
-          for (const item of this.cartItems) {
-            this.TotalAmount += item.total;
-          }
-          localStorage.setItem('Total', JSON.stringify(this.TotalAmount));
-          this.TotalAmountToDisplay = localStorage.getItem('Total');
-        } else {
-          console.error("Data retrieved from local storage is not in array format.");
-        }
+        console.log("cartItems", this.cartItems);
+        this.updateTotalAmount();
       }
- 
     });
-    // const storedJsonString = localStorage.getItem('cartItems') as string;
-    // this.cartItems = JSON.parse(storedJsonString);
   }
-
+  updateTotalAmount() {
+    this.TotalAmount = 0;
+    if (Array.isArray(this.cartItems)) {
+      for (const item of this.cartItems) {
+        this.TotalAmount += item.total;
+      }
+      
+    } else {
+      console.error("Data retrieved from local storage is not in array format.");
+    }
+  }
   deleteItem(index: any) {
     this.productService.deleteCartItem(index);
     this.cartItems = this.productService.getCartItems();
@@ -47,13 +48,18 @@ export class CartComponent implements OnDestroy {
 
   incrementCount(item: any) {
     item.count++;
+    item.total = item.price * item.count; // Recalculate the total for the item
+    this.updateTotalAmount(); // Update the total amount
     this.productService.updateCartItemsInLocalStorage(this.cartItems);
-
   }
 
   decrementCount(item: any) {
-    item.count--;
-    this.productService.updateCartItemsInLocalStorage(this.cartItems);
+    if (item.count > 1) {
+      item.count--;
+      item.total = item.price * item.count; // Recalculate the total for the item
+      this.updateTotalAmount(); // Update the total amount
+      this.productService.updateCartItemsInLocalStorage(this.cartItems);
+    }
   }
 
   storageKey: string = 'cartItems';

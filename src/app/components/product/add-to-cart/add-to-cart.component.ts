@@ -33,10 +33,9 @@ export class AddToCartComponent implements OnInit {
     }
   }
   cartCount: any;
-  sendDataToReceiver(product: any): void {
+  sendDataToCart(product: any): void {
     const total = product.price * this.count;
     const productWithCountAndTotal = { ...product, count: this.count, total: total };
     this.productservice.addToCart(productWithCountAndTotal);
-    console.log("product", productWithCountAndTotal);
   }
 }
