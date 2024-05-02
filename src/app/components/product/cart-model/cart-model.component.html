@@ -1,0 +1,76 @@
+ <div class="container">
+    <button class="close" mat-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+      </button>
+    <div>
+        <h2>Your cart</h2>
+    </div>
+    <div *ngIf="showEmpty" class="emptyCart">
+      <h1>Your cart is empty!</h1>
+      <img src="\assets\download.jpg">
+  </div>
+    <!-- <mat-card class="example-card" *ngIf="!showEmpty">
+      <mat-card-content *ngFor="let item of cartItems">
+        <mat-card-title-group>
+          <mat-card-title>{{item.title}}</mat-card-title>
+          <img mat-card-md-image src={{item.thumbnail}}>
+          <mat-card-subtitle>{{item.price|currency:'INR'}}</mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content class="countContent">
+          <button class="addBtn" mat-button matSuffix (click)="incrementCount(item)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <span>{{item.count}}</span>
+          <button class="subBtn" mat-button matPrefix (click)="decrementCount(item)">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </mat-card-content>
+        <mat-card-content>
+          {{item.total|currency:'INR'}}
+         </mat-card-content>
+         <button mat-button color="accent" (click)="deleteCartItem(item.id)">Delete</button>
+      </mat-card-content>
+    </mat-card> -->
+  <table class="table" *ngIf="!showEmpty">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of cartItems">
+            <td>{{item.id}}</td>
+            <td>{{item.title}}</td>
+            <td>
+                <img src={{item.thumbnail}} width="50" height="50">
+            </td>
+            <td>
+                {{item.price|currency:'INR'}}
+            </td>
+            <td>
+              <button mat-button matPrefix (click)="decrementCount(item)">
+                <mat-icon class="subBtn">remove</mat-icon>
+              </button>
+                  <span>{{item.count}}</span>
+                  <button mat-button matSuffix (click)="incrementCount(item)">
+                    <mat-icon  class="addBtn">add</mat-icon>
+                  </button>
+            </td>
+            <td>
+                {{item.total|currency:'INR'}}
+            </td>
+            <td>
+              <button mat-button color="accent" (click)="deleteCartItem(item.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!showEmpty">
+    <button style="height:50px;margin-bottom: 30px;" mat-raised-button color="primary">Pay {{TotalAmount|currency:'INR'}}</button>
+  </div>
+</div>

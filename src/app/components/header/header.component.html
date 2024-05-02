@@ -1,5 +1,6 @@
 <p>
-    <mat-toolbar color="primary">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
       </button>
@@ -7,7 +8,8 @@
       <span class="example-spacer">
         <h3>{{customerName}}</h3>
       </span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="openCart()">
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+        (click)="openCart()">
         <div matBadge={{cartCount}} matBadgeOverlap="false" class="demo-section">
           <mat-icon (click)="openCart()">shopping_cart</mat-icon>
         </div>
@@ -18,5 +20,19 @@
       <button *ngIf="isLoggedIn()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon (click)="logout()">logout</mat-icon>
       </button>
-    </mat-toolbar>
-  </p>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!-- <mat-sidenav-container>
+    <mat-sidenav #sidenav opened="false" mode="side">
+      <mat-nav-list>
+        <a mat-list-item>Home</a>
+        <a mat-list-item>Cart</a>
+        <a mat-list-item>My orders</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height:100vh;width: 150px;">
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container> -->
+</p>

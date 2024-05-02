@@ -1,0 +1,52 @@
+  <div class="container">
+    <mat-card *ngFor="let item of dataSub;let i=index" (mouseenter)="updateCardContent(item)" (mouseleave)="updateCardContent1(i)">
+        <mat-card-content *ngIf="!item.showNewContent">
+            <mat-card-header style="background-color: rgb(179, 179, 228);display: flex;flex-direction: row;">
+                <div style="display: flex;">
+                    <mat-icon>view_module</mat-icon>
+                    <mat-card-title>{{item.name}}</mat-card-title>
+                    <mat-card-title>Locations</mat-card-title>
+                    <mat-card-subtitle>{{item.open}}</mat-card-subtitle>
+                    <mat-card-title>
+                        <mat-icon>check</mat-icon>
+                      </mat-card-title>
+                </div>
+                <!-- <mat-card-title-group >
+                    <mat-card-title>
+                        <mat-icon>cube</mat-icon>
+                    </mat-card-title>
+                  <mat-card-title>{{item.name}}</mat-card-title>
+                  <mat-card-title>Locations</mat-card-title>
+                  <mat-card-subtitle>{{item.open}}</mat-card-subtitle>
+                  <mat-card-title>
+                    <mat-icon>check</mat-icon>
+                  </mat-card-title>
+                </mat-card-title-group> -->
+              </mat-card-header>
+              <mat-card-content>
+                {{longText}}
+              </mat-card-content>
+              <mat-card-footer>
+                  <button mat-raised-button color="primary">
+                      <mat-icon>person</mat-icon>
+                  </button>
+              </mat-card-footer>
+        </mat-card-content>
+        <mat-card-content *ngIf="item.showNewContent">
+            <mat-card-content>
+                <mat-card-header>
+                    <mat-card-title-group>
+                      <mat-card-title>{{selectedItemDetails.id}}</mat-card-title>
+                      <!-- <mat-card-subtitle>{{item.name}}</mat-card-subtitle> -->
+                      <!-- <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" > -->
+                    </mat-card-title-group>
+                  </mat-card-header>
+                  <mat-card-content>
+                  </mat-card-content>
+                  <mat-card-footer>
+                  </mat-card-footer>
+            </mat-card-content>
+        </mat-card-content>
+    
+      </mat-card>
+  </div>

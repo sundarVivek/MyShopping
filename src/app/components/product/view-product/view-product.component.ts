@@ -14,8 +14,8 @@ import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
 export class ViewProductComponent implements OnInit {
   products: any;
   constructor(private productService: ProductService,
-     public dialog: MatDialog,
-     private auth:AuthService) {
+    public dialog: MatDialog,
+    private auth: AuthService) {
 
   }
 
@@ -29,29 +29,20 @@ export class ViewProductComponent implements OnInit {
     )
   }
   openDialog(item: any) {
-    if(this.isLoggedIn()){
+    if (this.isLoggedIn()) {
       const dialogRef = this.dialog.open(AddToCartComponent, { data: item });
       dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog result: ${result}`);
       });
-    }else{
+    } else {
       this.dialog.open(WarningComponent);
     }
-    
+
   }
   isLoggedIn(): boolean {
     return this.auth.isLoggedIn();
   }
-  isLoading: boolean = true;
-  loadData() {
-    this.isLoading = true;
-    this.productService.getAllProducts().subscribe(data => {
-      // Process data
-      this.isLoading = false;
-    }, error => {
-      // Handle error
-      this.isLoading = false;
-    });
+  trackById(item: any): number {
+    return item ? item.id : null; // Return item.id if item is not null or undefined 
   }
-
 }

@@ -1,21 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  selector: 'app-cart-model',
+  templateUrl: './cart-model.component.html',
+  styleUrls: ['./cart-model.component.scss']
 })
-export class CartComponent implements OnDestroy {
-  displayedColumns: string[] = ['position','thumbnail', 'name', 'price', 'quantity','total'];
-  
-  cartItems: any;
-  TotalAmount: number = 0;
-  showEmpty: boolean = false;
-
-  constructor(private productService: ProductService) {
-  }
+export class CartModelComponent implements OnInit {
+  showEmpty:boolean=false;
+  cartItems:any;
+  constructor(private productService:ProductService) { }
 
   ngOnInit(): void {
     this.cartDetails();
@@ -32,13 +26,13 @@ export class CartComponent implements OnDestroy {
       }
     });
   }
+  TotalAmount:any;
   updateTotalAmount() {
     this.TotalAmount = 0;
     if (Array.isArray(this.cartItems)) {
       for (const item of this.cartItems) {
         this.TotalAmount += item.total;
       }
-      
     } else {
       console.error("Data retrieved from local storage is not in array format.");
     }
@@ -63,11 +57,8 @@ export class CartComponent implements OnDestroy {
       this.productService.updateCartItemsInLocalStorage(this.cartItems);
     }
   }
-
   storageKey: string = 'cartItems';
   deleteCartItem(id: any) {
     this.productService.deleteCartItem(id);
-  }
-  ngOnDestroy() {
   }
 }

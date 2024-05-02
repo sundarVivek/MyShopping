@@ -19,7 +19,7 @@ export class AddToCartComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  count: any = 1;
+  count: number = 1;
 
   incrementCount() {
     if (this.count < 100) {
@@ -28,7 +28,7 @@ export class AddToCartComponent implements OnInit {
   }
 
   decrementCount() {
-    if (this.count > 0) {
+    if (this.count > 1) {
       this.count--;
     }
   }

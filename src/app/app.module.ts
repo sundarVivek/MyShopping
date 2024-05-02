@@ -24,12 +24,16 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {ThemePalette} from '@angular/material/core';
 import {ProgressSpinnerMode, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSliderModule} from '@angular/material/slider';
+import { MatListModule } from "@angular/material/list";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatSidenavModule } from "@angular/material/sidenav";
 import { OrderHistoryComponent } from './components/product/order-history/order-history.component';
 import { RegistrationComponent } from './components/auth/registration/registration.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { LogOutComponent } from './components/auth/log-out/log-out.component';
 import { WarningComponent } from './components/auth/warning/warning.component';
-import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { CartModelComponent } from './components/product/cart-model/cart-model.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     LoginComponent,
     LogOutComponent,
     WarningComponent,
-    SpinnerComponent,
+    SidebarComponent,
+    CartModelComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     MatCardModule,MatButtonModule,MatDialogModule,MatInputModule
     ,MatFormFieldModule,MatIconModule,MatToolbarModule,MatTableModule,
     MatBadgeModule,MatTabsModule,
-    MatCardModule, MatCardModule, FormsModule, MatSliderModule, MatProgressSpinnerModule
+    MatCardModule, MatCardModule, FormsModule, MatSliderModule, MatProgressSpinnerModule,
+    MatListModule,MatTooltipModule,MatSidenavModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

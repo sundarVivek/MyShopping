@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ecommerce';
+  public isExpanded = false;
+
+  public toggleMenu() {
+    this.isExpanded = !this.isExpanded;
+  }
 }

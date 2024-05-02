@@ -1,6 +1,10 @@
 .countForm{
+    position: relative;
+    margin-top: 10px;
+}
+.countContent{
     display: flex;
-    text-align: center;
+    justify-content: center;
 }
 .addBtn{
     color: white;
@@ -11,6 +15,8 @@
 .subBtn{
     color: white;
     background-color: red;
+    width: 30px;
+    position: relative;
 }
  .mat-form-field-infix {
     width: auto !important;

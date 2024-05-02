@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div *ngIf="showEmpty" class="emptyCart">
     <h1>Your cart is empty!</h1>
     <img src="\assets\download.jpg">
@@ -14,10 +14,7 @@
         <button class="addBtn" mat-button matSuffix (click)="incrementCount(item)">
           <mat-icon>add</mat-icon>
         </button>
-        <mat-form-field appearance="outline" class="countForm">
-          <input class="count" matInput type="text" [(ngModel)]="item.count" [min]="0" [max]="100">
-        </mat-form-field>
-        <!-- <span [(ngModel)]="item.count">{{item.count}}</span> -->
+        <span>{{item.count}}</span>
         <button class="subBtn" mat-button matPrefix (click)="decrementCount(item)">
           <mat-icon>remove</mat-icon>
         </button>
@@ -31,4 +28,53 @@
   <div *ngIf="!showEmpty">
     <button style="height:50px;" mat-raised-button color="primary">Pay {{TotalAmount|currency:'INR'}}</button>
   </div>
-</div>
+</div> -->
+
+<table mat-table [dataSource]="cartItems" class="mat-elevation-z8">
+  <!-- Position Column -->
+  
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="thumbnail">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element"> 
+    <img src={{element.thumbnail}} width="100" height="100"> </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> quantity </th>
+    <td mat-cell *matCellDef="let element"> 
+      <button mat-button matPrefix (click)="decrementCount(element)">
+        <mat-icon class="subBtn">remove</mat-icon>
+      </button>
+          <span>{{element.count}}</span>
+          <button mat-button matSuffix (click)="incrementCount(element)">
+            <mat-icon  class="addBtn">add</mat-icon>
+          </button> </td>
+  </ng-container>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef> Price </th>
+    <td mat-cell *matCellDef="let element"  [ngStyle]="{'background-color': element.price > 1000 ? 'green' : 'transparent'}"> {{element.price}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="total">
+    <th mat-header-cell *matHeaderCellDef> Total </th>
+    <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

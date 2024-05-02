@@ -16,14 +16,19 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      email: ['', Validators.email],
+      username:['',Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     })
   }
   onSubmit() {
-    const users:any=this.registerForm.value;
-    this.auth.storeRegistration(users);
-    this.route.navigate(['/login']);
+    if(this.registerForm.valid){
+      const users:any=this.registerForm.value;
+      this.auth.storeRegistration(users);
+      this.route.navigate(['/login']);
+    }else{
+        alert('Please fill all the fields');
+    }
   }
 
 }

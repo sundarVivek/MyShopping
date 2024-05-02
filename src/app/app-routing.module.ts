@@ -5,6 +5,7 @@ import { CartComponent } from './components/product/cart/cart.component';
 import { OrderHistoryComponent } from './components/product/order-history/order-history.component';
 import { RegistrationComponent } from './components/auth/registration/registration.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path:'login',
     component:LoginComponent
+  },
+  {
+    path:'sidebar',
+    component:SidebarComponent
   },
 
 ];
