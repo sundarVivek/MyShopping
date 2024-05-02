@@ -55,14 +55,11 @@ export class HeaderComponent implements OnDestroy {
 
   openCart() {
     // this.route.navigate(['/cart'])
-    const dialogRef=this.dialog.open(CartModelComponent, {
+  this.dialog.open(CartModelComponent, {
       width: '700px', // Adjust width as needed
       position: { left: '0' }, // Set position to the lef
       height:'600px',
       data:{}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
   isLoggedIn(): boolean {

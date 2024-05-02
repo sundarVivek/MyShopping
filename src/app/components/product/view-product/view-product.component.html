@@ -4,11 +4,11 @@
         <mat-card-content>
             <img class="image" src={{item.thumbnail}} width="200px" height="150px">
           <p>{{item.description}}</p>
+        </mat-card-content>
+        <mat-card-footer>
           <h2 style="color: red;">
             {{item.price|currency:'INR'}}
           </h2>
-        </mat-card-content>
-        <mat-card-footer>
             <mat-card-actions>
                 <button mat-raised-button color="warn" (click)="openDialog(item)">Add to cart</button>
                 <button mat-raised-button color="primary">Buy now</button>

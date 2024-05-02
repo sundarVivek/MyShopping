@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -7,9 +8,9 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./cart-model.component.scss']
 })
 export class CartModelComponent implements OnInit {
-  showEmpty:boolean=false;
-  cartItems:any;
-  constructor(private productService:ProductService) { }
+  showEmpty: boolean = false;
+  cartItems: any;
+  constructor(private productService: ProductService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.cartDetails();
@@ -26,7 +27,7 @@ export class CartModelComponent implements OnInit {
       }
     });
   }
-  TotalAmount:any;
+  TotalAmount: any;
   updateTotalAmount() {
     this.TotalAmount = 0;
     if (Array.isArray(this.cartItems)) {
@@ -60,5 +61,8 @@ export class CartModelComponent implements OnInit {
   storageKey: string = 'cartItems';
   deleteCartItem(id: any) {
     this.productService.deleteCartItem(id);
+  }
+  close() {
+    this.dialog.closeAll();
   }
 }
