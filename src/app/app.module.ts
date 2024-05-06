@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ViewProductComponent } from './components/product/view-product/view-product.component';
 import { AddToCartComponent } from './components/product/add-to-cart/add-to-cart.component';
-import { HttpClientModule } from  '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from  '@angular/common/http';
 import { ProductService } from './services/product.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //material
@@ -34,6 +34,9 @@ import { LogOutComponent } from './components/auth/log-out/log-out.component';
 import { WarningComponent } from './components/auth/warning/warning.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CartModelComponent } from './components/product/cart-model/cart-model.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { LoadingInterceptor } from './services/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,7 @@ import { CartModelComponent } from './components/product/cart-model/cart-model.c
     WarningComponent,
     SidebarComponent,
     CartModelComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,9 +64,15 @@ import { CartModelComponent } from './components/product/cart-model/cart-model.c
     ,MatFormFieldModule,MatIconModule,MatToolbarModule,MatTableModule,
     MatBadgeModule,MatTabsModule,
     MatCardModule, MatCardModule, FormsModule, MatSliderModule, MatProgressSpinnerModule,
-    MatListModule,MatTooltipModule,MatSidenavModule
+    MatListModule,MatTooltipModule,MatSidenavModule,MatProgressBarModule
   ],
-  providers: [ProductService],
+  providers: [ProductService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

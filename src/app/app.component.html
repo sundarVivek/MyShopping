@@ -1,2 +1,10 @@
 <app-header></app-header>
+<!-- Loading spinner -->
+<div *ngIf="loading" class="loading-container flex-content-center">
+    <mat-progress-spinner
+      color="primary"
+      mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+  <!-- the application -->
 <router-outlet></router-outlet>

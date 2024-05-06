@@ -1,8 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 import { WarningComponent } from '../../auth/warning/warning.component';
 import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
 
@@ -16,14 +18,16 @@ import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
 export class ViewProductComponent implements OnDestroy {
   products: any;
   private productSubscription: Subscription = new Subscription;
+  
   constructor(private productService: ProductService,
     public dialog: MatDialog,
+    private http: HttpClient,
     private auth: AuthService) {
-
+    
   }
 
   ngOnInit(): void {
-    this.productSubscription=this.productService.getAllProducts().subscribe((res: any) => {
+    this.productSubscription = this.productService.getAllProducts().subscribe((res: any) => {
       console.log("res", res);
       const myArray = Object.values(res.products);
       this.products = myArray;
@@ -49,6 +53,6 @@ export class ViewProductComponent implements OnDestroy {
     return item ? item.id : null; // Return item.id if item is not null or undefined 
   }
   ngOnDestroy(): void {
-      this.productSubscription.unsubscribe();
+    this.productSubscription.unsubscribe();
   }
 }

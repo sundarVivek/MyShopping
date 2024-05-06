@@ -6,6 +6,7 @@ import { OrderHistoryComponent } from './components/product/order-history/order-
 import { RegistrationComponent } from './components/auth/registration/registration.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path:'sidebar',
     component:SidebarComponent
+  },
+  {
+    path:'spinner',
+    component:SpinnerComponent
   },
 
 ];
